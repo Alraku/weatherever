@@ -1,15 +1,17 @@
+# -*- coding: UTF-8 -*-
 import requests
 import json
 
 from pprint import pprint
-from CustomLogger import CustomFormatter
+from custom_logger import CustomFormatter
 
 class Weather():
 
     def __init__(self):
 
         self.config = json.load(open("app/config/api_key.json"))
-        self.url = 'http://api.openweathermap.org/data/2.5/weather?&%s&units=metric&lang=en' % self.config.get('API_Key')
+        API_Key = self.config.get('API_Key')
+        self.url = f'http://api.openweathermap.org/data/2.5/weather?&{API_Key}&units=metric&lang=en'
 
     def request_weather(self, city):
 
@@ -24,8 +26,8 @@ class Weather():
 
     def show_weather(self, city="Gdańsk"): 
 
-        response_weather = Weather.request_weather(self, city)
-        Weather.format_output(self, response_weather)
+        response_weather = self.request_weather(city)
+        self.format_output(response_weather)
 
     def format_output(self, weather_response):
 
