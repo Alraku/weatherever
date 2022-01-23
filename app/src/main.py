@@ -2,50 +2,43 @@ import requests
 import json
 
 from pprint import pprint
+from CustomLogger import CustomFormatter
 
 class Weather():
 
-    config = json.load(open("app/config/api_key.json"))
-    url = 'http://api.openweathermap.org/data/2.5/weather?&%s&units=metric&lang=pl' % config.get('API_Key')
-        
-    def showWeather(self, city="Gdańsk"): 
-        self.city = city
-        r = requests.get(self.url + '&q=' + self.city)
+    def __init__(self):
+
+        self.config = json.load(open("app/config/api_key.json"))
+        self.url = 'http://api.openweathermap.org/data/2.5/weather?&%s&units=metric&lang=en' % self.config.get('API_Key')
+
+    def request_weather(self, city):
+
+        r = requests.get(self.url + '&q=' + city)
         weather = json.loads(r.text)
 
         #Check if we had a failture
         if weather['cod'] != 200:
             raise Exception(weather['message'])
 
-        pprint(weather)
+        return weather
 
+    def show_weather(self, city="Gdańsk"): 
 
-# print(weather_data['city'])
-# print(weather_data.get('city').get('name'))
-# print(weather_data.get('city').get('main').get('temp'))
+        response_weather = Weather.request_weather(self, city)
+        Weather.format_output(self, response_weather)
+
+    def format_output(self, weather_response):
+
+        #pprint(weather_response)
+        weather_dict = {"city": weather_response.get('name'), 
+                        "country": weather_response.get('sys').get('country'),
+                        "temp": round(weather_response.get('main').get('temp'),1),
+                        "weather": weather_response['weather'][0]['description']}
+
+        logger = CustomFormatter().get_logger()
+        logger.info('')
+        logger.error("Current weather for location {city} ({country}) is {temp} Celsius and it is {weather}".format(**weather_dict))
 
 test = Weather()
-test.showWeather('London')
+test.show_weather('Gdańsk')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# logger.debug("debug message")
-# logger.info("info message")
-# logger.warning("warning message")
-# logger.error("error message")
-# logger.critical("critical message")
