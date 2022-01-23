@@ -5,12 +5,18 @@ from pprint import pprint
 
 class Weather():
 
-    url = 'http://api.openweathermap.org/data/2.5/weather?&appid=fafa5ec8ced374a06b103d3c60e1b76d&units=metric&lang=pl'
+    config = json.load(open("app/config/api_key.json"))
+    url = 'http://api.openweathermap.org/data/2.5/weather?&%s&units=metric&lang=pl' % config.get('API_Key')
         
     def showWeather(self, city="Gdańsk"): 
         self.city = city
         r = requests.get(self.url + '&q=' + self.city)
         weather = json.loads(r.text)
+
+        #Check if we had a failture
+        if weather['cod'] != 200:
+            raise Exception(weather['message'])
+
         pprint(weather)
 
 
