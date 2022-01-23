@@ -13,6 +13,7 @@ class Weather():
         weather = json.loads(r.text)
         pprint(weather)
 
+
 # print(weather_data['city'])
 # print(weather_data.get('city').get('name'))
 # print(weather_data.get('city').get('main').get('temp'))
