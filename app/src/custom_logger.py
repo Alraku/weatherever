@@ -34,5 +34,4 @@ class CustomFormatter(logging.Formatter):
 
         return logger
 
-
 # formatter = ColoredFormatter(log_format, datefmt=time_format)
