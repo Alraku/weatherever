@@ -1,4 +1,7 @@
-from menu_interface import Menu
+import sys
+sys.path.append("..")
+
+from app.interface.menu_interface import Menu
 
 if __name__ == "__main__":
-    menu = Menu.main()  
+    menu = Menu.get_interface()
