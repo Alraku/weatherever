@@ -1,14 +1,20 @@
+import json
 from pip import main
 from simple_term_menu import TerminalMenu
+from types import SimpleNamespace
 
 class MenuItems():
 
-    def get_main_menu():
+    def __init__(self):
+
+        self.config = json.load(open("config/config.json"), object_hook=lambda d: SimpleNamespace(**d))
+
+    def get_main_menu(self):
 
         main_menu_title = "  [WEATHER APP - ver 0.3]\n"
         main_menu_items = [
             "[1] ---TEST---",
-            "[2] Weather for Gdańsk", 
+            f"[2] Weather for {self.config.default_city}", 
             "[3] Weather for Location", 
             "[4] Quit Weather App"]
         
@@ -24,7 +30,7 @@ class MenuItems():
         return main_menu
 
 
-    def get_back_menu():
+    def get_back_menu(self):
 
         back_menu = TerminalMenu (
             menu_entries = ["Back to Main Menu"],
@@ -38,7 +44,7 @@ class MenuItems():
         return back_menu
 
 
-    def get_edit_menu():
+    def get_edit_menu(self):
 
         edit_menu_title = "  Edit Menu\n"
         edit_menu_items = ["Edit Config", "Save Settings", "Back to Main Menu"]

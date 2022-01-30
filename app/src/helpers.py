@@ -1,3 +1,5 @@
+import datetime
+
 def wind_direction(direction: int):
 
     if 338 <= direction <= 360 or 1 <= direction <= 22:
@@ -16,3 +18,10 @@ def wind_direction(direction: int):
         return "West"
     elif 293 <= direction <= 337:
         return "North-West"
+
+
+def format_datetime(unix_time, offset):
+    
+    formatted_datetime = datetime.datetime.fromtimestamp(unix_time + offset - 3600).strftime('%H:%M')
+    return formatted_datetime
+
