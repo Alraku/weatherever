@@ -1,5 +1,8 @@
 import datetime
 
+import subprocess
+
+
 def wind_direction(direction: int):
 
     if 338 <= direction <= 360 or 1 <= direction <= 22:
@@ -25,3 +28,4 @@ def format_datetime(unix_time, offset):
     formatted_datetime = datetime.datetime.fromtimestamp(unix_time + offset - 3600).strftime('%H:%M')
     return formatted_datetime
 
+#subprocess.run(["vim", "config/config.json"])

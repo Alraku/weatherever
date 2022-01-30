@@ -21,6 +21,12 @@ class Menu():
             main_sel = main_menu.show()
 
             if main_sel == 0:
+                weather.show_weather("default")
+                back_menu.show()
+            elif main_sel == 1:
+                weather.show_weather()
+                back_menu.show()
+            elif main_sel == 2:
                 while not edit_menu_back:
                     edit_sel = edit_menu.show()
                     if edit_sel == 0:
@@ -33,12 +39,6 @@ class Menu():
                         edit_menu_back = True
                         print("Back Selected")
                 edit_menu_back = False
-            elif main_sel == 1:
-                weather.show_weather("default")
-                back_menu.show()
-            elif main_sel == 2:
-                weather.show_weather()
-                back_menu.show()
             elif main_sel == 3:
                 main_menu_exit = True
 

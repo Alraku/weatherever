@@ -13,9 +13,9 @@ class MenuItems():
 
         main_menu_title = "  [WEATHER APP - ver 0.3]\n"
         main_menu_items = [
-            "[1] ---TEST---",
-            f"[2] Weather for {self.config.default_city}", 
-            "[3] Weather for Location", 
+            f"[1] Weather for {self.config.default_city}", 
+            "[2] Weather for Location", 
+            "[3] Edit Config",
             "[4] Quit Weather App"]
         
         main_menu = TerminalMenu (
