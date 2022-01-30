@@ -5,23 +5,22 @@ class MenuItems():
 
     def get_main_menu():
 
-        main_menu_title = "[WEATHER APP - ver 0.2]\n\n\n"
+        main_menu_title = "  [WEATHER APP - ver 0.3]\n"
         main_menu_items = [
-            "---TEST---",
-            "Weather for Gdańsk", 
-            "Weather for Location", 
-            "Quit Weather App"]
+            "[1] ---TEST---",
+            "[2] Weather for Gdańsk", 
+            "[3] Weather for Location", 
+            "[4] Quit Weather App"]
         
         main_menu = TerminalMenu (
             menu_entries = main_menu_items,
-            #title=main_menu_title,
+            title = main_menu_title,
             menu_cursor = "> ",
             menu_cursor_style = ("fg_red", "bold"),
-            menu_highlight_style = ("bg_red", "fg_yellow"),
+            menu_highlight_style = ("bg_blue", "fg_black", "bold"),
             cycle_cursor = True,
             clear_screen = True,
         )
-
         return main_menu
 
 
@@ -36,8 +35,8 @@ class MenuItems():
             cycle_cursor = True,
             clear_screen = False,
         )
-
         return back_menu
+
 
     def get_edit_menu():
 
@@ -53,5 +52,4 @@ class MenuItems():
             cycle_cursor = True,
             clear_screen = True,
         )
-
         return edit_menu

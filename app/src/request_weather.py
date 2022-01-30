@@ -1,10 +1,12 @@
 # -*- coding: UTF-8 -*-
 import requests
 import json
+import datetime
 
 from pprint import pprint
 from types import SimpleNamespace
-from custom_logger import CustomFormatter
+from custom_colors import CustomFormatter, Colors
+from helpers import wind_direction
 
 
 class Weather():
@@ -34,23 +36,51 @@ class Weather():
     def show_weather(self): 
 
         city = input('Enter name of the location: ')
-        response_weather = self.request_weather(city)
-        self.format_output(response_weather)
+        response = self.request_weather(city)
+        weather_data = self.gather_data(response)
+        self.format_output(weather_data)
 
     def show_weather_default(self): 
 
         city = 'Gdańsk'
-        response_weather = self.request_weather(city)
-        self.format_output(response_weather)
+        response = self.request_weather(city)
+        weather_data = self.gather_data(response)
+        self.format_output(weather_data)
 
-    def format_output(self, weather_response):
+    def gather_data(self, weather_response):
 
         #pprint(weather_response)
         weather_dict = {"city": weather_response.get('name'), 
                         "country": weather_response.get('sys').get('country'),
                         "temp": round(weather_response.get('main').get('temp'),1),
-                        "weather": weather_response['weather'][0]['description']}
+                        "weather": weather_response['weather'][0]['description'].title(),
+                        "wind_speed": round(weather_response['wind']['speed']*3.6, 0),
+                        "wind_direction": wind_direction(weather_response['wind']['deg']),
+                        "wind_gust": round(weather_response.get('wind').get('gust', 0)*3.6, 0),
+                        "feels_like": round(weather_response['main']['feels_like'],1),
+                        "humidity": weather_response['main']['humidity'],
+                        "pressure": weather_response['main']['pressure'],
+                        "sunrise": datetime.datetime.fromtimestamp(weather_response['sys']['sunrise']).strftime('%H:%M'),
+                        "sunset": datetime.datetime.fromtimestamp(weather_response['sys']['sunset']).strftime('%H:%M')}
 
-        
+        return weather_dict
+
+    def format_output(self, WD):
+
+        #pprint(WD)
         self.logger.info('')
-        self.logger.error("Current weather for location {city} ({country}) is {temp} Celsius and it is {weather}".format(**weather_dict))
+        print("\n")
+        print(f"{Colors.FG.RED}Location:{Colors.RESET} {WD.get('city')} ({WD.get('country')})")
+        print(f"{Colors.FG.RED}Temperature:{Colors.RESET} {WD.get('temp')} °C")
+        print(f"{Colors.FG.RED}Feels Like:{Colors.RESET} {WD.get('feels_like')} °C")
+        print(f"{Colors.FG.RED}Conditions:{Colors.RESET} {WD.get('weather')}")
+        print(f"{Colors.FG.RED}Humidity:{Colors.RESET} {WD.get('humidity')}%")
+        print(f"{Colors.FG.RED}Pressure:{Colors.RESET} {WD.get('pressure')} hPa\n")
+        print(f"{Colors.FG.RED}Wind:{Colors.RESET} {WD.get('wind_speed')} Km/h")
+        print(f"{Colors.FG.RED}Wind Direction:{Colors.RESET} {WD.get('wind_direction')}")
+        print(f"{Colors.FG.RED}Wind Gusts:{Colors.RESET} {WD.get('wind_gust')} Km/h\n")
+        print(f"{Colors.FG.RED}Sunrise:{Colors.RESET} {WD.get('sunrise')}")
+        print(f"{Colors.FG.RED}Sunset:{Colors.RESET} {WD.get('sunset')}")
+
+#test = Weather()
+#test.show_weather_default()
