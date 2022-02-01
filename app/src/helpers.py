@@ -1,6 +1,10 @@
-import datetime
+# -*- encoding: utf-8 -*-
 
+import datetime
+import json
+import codecs
 import subprocess
+from collections import OrderedDict
 
 
 def wind_direction(direction: int):
@@ -28,4 +32,15 @@ def format_datetime(unix_time, offset):
     formatted_datetime = datetime.datetime.fromtimestamp(unix_time + offset - 3600).strftime('%H:%M')
     return formatted_datetime
 
-#subprocess.run(["vim", "config/config.json"])
+
+def edit_config(key: str, value: str):
+
+    with codecs.open('config/config.json', 'r', encoding = 'utf-8') as f:
+        data = json.load(f, object_pairs_hook = OrderedDict)
+
+    data[key] = value
+
+    with codecs.open('config/config.json', 'w') as f:
+        json.dump(data, f, indent = 2, ensure_ascii = False)
+    
+    f.close()

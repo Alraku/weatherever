@@ -1,9 +1,15 @@
 # -*- coding: UTF-8 -*-
 import time
+import sys
+from importlib import reload
 
-from simple_term_menu import TerminalMenu
+sys.path.append("..")
+
+path_to_module = '/app/src/request_weather'
+
 from app.src.request_weather import Weather
 from app.interface.menu_items import MenuItems
+from app.src.helpers import edit_config
 
 
 class Menu():
@@ -14,8 +20,10 @@ class Menu():
         back_menu = MenuItems().get_back_menu()
         main_menu = MenuItems().get_main_menu()
         edit_menu = MenuItems().get_edit_menu()
+        unit_menu = MenuItems().get_unit_menu()
         main_menu_exit = False
         edit_menu_back = False
+        unit_menu_back = False
 
         while not main_menu_exit:
             main_sel = main_menu.show()
@@ -30,18 +38,24 @@ class Menu():
                 while not edit_menu_back:
                     edit_sel = edit_menu.show()
                     if edit_sel == 0:
-                        print("Edit Config Selected")
-                        time.sleep(5)
+                        while not unit_menu_back:
+                            unit_sel = unit_menu.show()
+                            if unit_sel == 0:
+                                edit_config("units", "standard")
+                            if unit_sel == 1:
+                                edit_config("units", "metric")
+                            if unit_sel == 2:
+                                edit_config("units", "imperial")
+                            if unit_sel == 3:
+                                unit_menu_back = True
+                                weather.__init__()
                     elif edit_sel == 1:
-                        print("Save Selected")
+                        print("Edit Language Selected")
                         time.sleep(5)
                     elif edit_sel == 2:
+                        print("Edit Default City Selected")
+                    elif edit_sel == 3:
                         edit_menu_back = True
-                        print("Back Selected")
                 edit_menu_back = False
             elif main_sel == 3:
                 main_menu_exit = True
-
-
-       
-

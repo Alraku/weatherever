@@ -46,8 +46,12 @@ class MenuItems():
 
     def get_edit_menu(self):
 
-        edit_menu_title = "  Edit Menu\n"
-        edit_menu_items = ["Edit Config", "Save Settings", "Back to Main Menu"]
+        edit_menu_title = "  [WEATHER APP - Edit Menu]\n"
+        edit_menu_items = [
+            "[1] Edit Units",
+            "[2] Edit Language",
+            "[3] Edit Default City",
+            "[4] Back to Main Menu"]
 
         edit_menu = TerminalMenu (
             menu_entries = edit_menu_items,
@@ -59,3 +63,24 @@ class MenuItems():
             clear_screen = True,
         )
         return edit_menu
+
+
+    def get_unit_menu(self):
+
+        unit_menu_title = "  [WEATHER APP - Unit Menu]\n"
+        unit_menu_items = [
+            "[1] Standard Units",
+            "[2] Metric Units",
+            "[3] Imperial Units",
+            "[4] Back to Edit Menu"]
+
+        unit_menu = TerminalMenu (
+            menu_entries = unit_menu_items,
+            title = unit_menu_title,
+            menu_cursor = "> ",
+            menu_cursor_style = ("fg_red", "bold"),
+            menu_highlight_style = ("bg_red", "fg_yellow"),
+            cycle_cursor = True,
+            clear_screen = True,
+        )
+        return unit_menu
