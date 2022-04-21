@@ -2,3 +2,4 @@ app/config/api_key.json
 __pycache__/
 .DS_Store
 app/python
+.vscode
