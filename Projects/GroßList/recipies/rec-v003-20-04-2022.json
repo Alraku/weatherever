@@ -1,0 +1,40 @@
+{
+    "info": {
+
+        "name": "Marynowane Parówki",
+        "create_date": "2022-04-22"
+    },
+    "main": {
+
+        "ingredients": [
+            {
+                "name": "Parówki Berlińskie 200g",
+                "category": "meat",
+                "quantity": 1
+            },
+            {
+                "name": "Papryka",
+                "category": "vegetable",
+                "quantity": 3
+            },
+            {
+                "name": "Ketchup",
+                "category": "sauce",
+                "quantity": 1
+            },
+            {
+                "name": "Musztarda",
+                "category": "sauce",
+                "quantity": 1
+            }
+        ],
+        "tools": [
+            "Garnek", "Mikser"
+        ],
+        "instructions": [
+            "Zagotuj wodę na parówki.",
+            "Pokrój Paprykę w drobne kawałki.",
+            "Umyj Keczup dokładnie."
+        ]
+    }
+}

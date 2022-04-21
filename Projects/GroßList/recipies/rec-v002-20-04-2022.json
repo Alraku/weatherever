@@ -1,0 +1,16 @@
+{
+    "info": {
+
+        "name": "Piklowane Parówki",
+        "create_date": "2022-04-22"
+    },
+    "main": {
+
+        "ingredients": {
+
+            "vegetable": [],
+            "meat": ["Parówki Berlińskie 200g"],
+            "sauce": ["Ketchup", "Musztarda"]
+        }
+    }
+}
