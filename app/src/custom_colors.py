@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import logging
 
 class CustomFormatter(logging.Formatter):
@@ -34,10 +35,6 @@ class CustomFormatter(logging.Formatter):
         logger.addHandler(ch)
 
         return logger
-
-# formatter = ColoredFormatter(log_format, datefmt=time_format)
-# ct = ColoredText()
-# ct.prCyan("Hello World")
 
 
 class Colors():
@@ -84,5 +81,3 @@ class ColoredText():
     def prCyan(self, skk): print("\033[96m {}\033[00m" .format(skk))
     def prLightGray(self, skk): print("\033[97m {}\033[00m" .format(skk))
     def prBlack(self, skk): print("\033[98m {}\033[00m" .format(skk))
-
-

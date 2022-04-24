@@ -1,15 +1,9 @@
 # -*- coding: UTF-8 -*-
 import time
-import sys
-from importlib import reload
 
-sys.path.append("../../")
-
-path_to_module = '/app/src/request_weather'
-
-from app.src.request_weather import Weather
-from app.interface.menu_items import MenuItems
-from app.src.helpers import edit_config
+from src.request_weather import Weather
+from src.menu_items import MenuItems
+from src.helpers import edit_config
 
 
 class Menu():

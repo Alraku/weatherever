@@ -2,13 +2,11 @@
 import requests
 import json
 import time
-import sys
-
 
 from pprint import pprint
 from types import SimpleNamespace
-from app.src.custom_colors import CustomFormatter, Colors
-from helpers import wind_direction, format_datetime
+from src.custom_colors import CustomFormatter, Colors
+from src.helpers import wind_direction, format_datetime
 
 
 class Weather():
@@ -18,8 +16,8 @@ class Weather():
         #Initialize logger in order to print formatted weather info
         self.logger = CustomFormatter().get_logger()
 
-        self.config = json.load(open("app/config/config.json"), object_hook=lambda d: SimpleNamespace(**d))
-        self.API_Key = json.load(open("app/config/api_key.json")).get('API_Key')
+        self.config = json.load(open("config/config.json"), object_hook=lambda d: SimpleNamespace(**d))
+        self.API_Key = json.load(open("config/api_key.json")).get('API_Key')
 
         self.url_city_name = f'http://api.openweathermap.org/data/2.5/weather?&{self.API_Key}&units={self.config.units}&lang={self.config.language}'
         self.url_coordinates = f'https://api.openweathermap.org/data/2.5/onecall?exclude=hourly,daily&{self.API_Key}&units={self.config.units}&lang={self.config.language}&lat=10.44&lon=-94.04'
@@ -48,7 +46,6 @@ class Weather():
 
     def gather_data(self, weather_response):
 
-        #pprint(weather_response)
         weather_dict = {
             "city": weather_response.get('name'), 
             "country": weather_response.get('sys').get('country'),
@@ -85,5 +82,3 @@ class Weather():
         print(f"{Colors.FG.RED}Sunrise:{Colors.RESET} {WD.get('sunrise')}")
         print(f"{Colors.FG.RED}Sunset:{Colors.RESET} {WD.get('sunset')}")
 
-#test = Weather()
-#test.show_weather_default()
