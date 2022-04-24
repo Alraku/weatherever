@@ -1,5 +1,5 @@
 import sys
-sys.path.append("..")
+sys.path.append("../../")
 
 from app.interface.menu_interface import Menu
 

@@ -3,7 +3,7 @@ import time
 import sys
 from importlib import reload
 
-sys.path.append("..")
+sys.path.append("../../")
 
 path_to_module = '/app/src/request_weather'
 
