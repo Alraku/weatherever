@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
 import time
 
-from src.request_weather import Weather
-from src.menu_items import MenuItems
-from src.helpers import edit_config
+from source.request_weather import Weather
+from source.menu_items import MenuItems
+from source.helpers import edit_config
 
 
 class Menu():

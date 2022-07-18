@@ -6,7 +6,7 @@ import time
 from pprint import pprint
 from types import SimpleNamespace
 from source.custom_colors import CustomFormatter, Colors
-from src.helpers import wind_direction, format_datetime
+from source.helpers import wind_direction, format_datetime
 
 
 class Weather():
@@ -16,8 +16,8 @@ class Weather():
         #Initialize logger in order to print formatted weather info
         self.logger = CustomFormatter().get_logger()
 
-        self.config = json.load(open("config/config.json"), object_hook=lambda d: SimpleNamespace(**d))
-        self.API_Key = json.load(open("config/api_key.json")).get('API_Key')
+        self.config = json.load(open("config.json"), object_hook=lambda d: SimpleNamespace(**d))
+        self.API_Key = json.load(open("api_key.json")).get('API_Key')
 
         self.url_city_name = f'http://api.openweathermap.org/data/2.5/weather?&{self.API_Key}&units={self.config.units}&lang={self.config.language}'
         self.url_coordinates = f'https://api.openweathermap.org/data/2.5/onecall?exclude=hourly,daily&{self.API_Key}&units={self.config.units}&lang={self.config.language}&lat=10.44&lon=-94.04'

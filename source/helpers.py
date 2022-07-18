@@ -35,12 +35,12 @@ def format_datetime(unix_time, offset):
 
 def edit_config(key: str, value: str):
 
-    with codecs.open('config/config.json', 'r', encoding = 'utf-8') as f:
+    with codecs.open('config.json', 'r', encoding = 'utf-8') as f:
         data = json.load(f, object_pairs_hook = OrderedDict)
 
     data[key] = value
 
-    with codecs.open('config/config.json', 'w') as f:
+    with codecs.open('config.json', 'w') as f:
         json.dump(data, f, indent = 2, ensure_ascii = False)
     
     f.close()

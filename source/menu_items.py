@@ -7,7 +7,7 @@ class MenuItems():
 
     def __init__(self):
 
-        self.config = json.load(open("config/config.json"), object_hook=lambda d: SimpleNamespace(**d))
+        self.config = json.load(open("config.json"), object_hook=lambda d: SimpleNamespace(**d))
 
     def get_main_menu(self):
 
