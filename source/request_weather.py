@@ -1,9 +1,10 @@
-# -*- coding: UTF-8 -*-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import requests
 import json
 import time
 
-from pprint import pprint
 from types import SimpleNamespace
 from source.custom_colors import CustomFormatter, Colors
 from source.helpers import wind_direction, format_datetime
@@ -12,9 +13,6 @@ from source.helpers import wind_direction, format_datetime
 class Weather():
 
     def __init__(self):
-
-        #Initialize logger in order to print formatted weather info
-        self.logger = CustomFormatter().get_logger()
 
         self.config = json.load(open("config.json"), object_hook=lambda d: SimpleNamespace(**d))
         self.API_Key = json.load(open("api_key.json")).get('API_Key')
